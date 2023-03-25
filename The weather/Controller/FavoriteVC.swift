@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteVC: UIViewController {
+class FavoriteVC: UIViewController, UIApplicationDelegate {
 
     
     @IBOutlet weak var tableViewFavor: UITableView!
@@ -22,10 +22,9 @@ class FavoriteVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewFavor.dataSource = self
         
-        var firstElement = FavorData(titleCity: "Mykolaiv", imageWeather: UIImage(systemName: "star")!, tempCity: 12)
-        arrayFavorData.append(firstElement)
+        tableViewFavor.dataSource = self
+        tableViewFavor.delegate = self
         
     }
  
@@ -33,15 +32,16 @@ class FavoriteVC: UIViewController {
 }
 
 extension FavoriteVC:  UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayFavorData.count
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableViewFavor.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FavoriteCell
-        cell.lableFavor.text = arrayFavorData[0].titleCity + String(arrayFavorData[0].tempCity)
-        cell.imageFavor.image = arrayFavorData[0].imageWeather
+        let cell = tableViewFavor.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "Here is will be Favorite"
         
         return cell
     }

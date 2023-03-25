@@ -9,9 +9,7 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     
     var urlForSearch = ""
     var cityNameForSearch = ""
-    
-    var delegat = MainVC()
-    
+  
     @IBOutlet weak var searchTextField: UITextField!
     
     @IBOutlet weak var tableViewSearch: UITableView!
@@ -84,7 +82,7 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         print(cond)
         print(temp_c)
 
-        var dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
+        let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
         arraySearchData.append(dataForCell)
         
         print(arraySearchData.count)
