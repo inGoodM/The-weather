@@ -7,28 +7,23 @@ import CoreLocation
 
 class SearchVC: UIViewController, UITextFieldDelegate {
     
-    var urlForSearch = ""
-    var cityNameForSearch = ""
-  
+
     @IBOutlet weak var searchTextField: UITextField!
-    
     @IBOutlet weak var tableViewSearch: UITableView!
     
-    //MARK: Make structure and array for storage for data from API
+    // Variable for perfomance
     
-    struct SearchData {
-        
-        var titleCity: String
-        var tempCity: String
-        var imageUrl: String
-        var linkUrl: String
-        
-    }
-    
+    var urlForSearch = ""
+    var cityNameForSearch = ""
+    var cityName = ""
+    var temp_c = ""
+    var cond = ""
+    var condLink = ""
+    var isFavorite = false
     var arraySearchData: [SearchData] = []
     
-    
-    // MARK: Make structure for API data
+
+// MARK: Make structure for API data and storage api information
     
     struct WeatherData: Codable {
         let location: Location
@@ -49,15 +44,14 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         let localtime: String
     }
     
-    var cityName = ""
-    var temp_c = ""
-    var cond = ""
-    var condLink = ""
-    
-    var isFavorite = false
-    
-  
-    
+    struct SearchData {
+        
+        var titleCity: String
+        var tempCity: String
+        var imageUrl: String
+        var linkUrl: String
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,12 +73,11 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         searchRequestFromApi(city: urlForSearch)
         
         let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
-       arraySearchData.append(dataForCell)
-       tableViewSearch.reloadData()
+            arraySearchData.append(dataForCell)
+            tableViewSearch.reloadData()
         
     }
     
-
     // Function for request
     
     func searchRequestFromApi (city url: String) {
@@ -114,10 +107,9 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     // Alert for non-correct cityname
     
     func nonCorrectCity () {
-        
         let alert = UIAlertController(title: "Увага", message: "Введенно некоректну назву міста", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(alert, animated: true)
         
     }
     

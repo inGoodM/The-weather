@@ -26,6 +26,26 @@ class MainVC: UIViewController, CLLocationManagerDelegate {
     var long: Double = 0.0
     
     
+    // MARK: Make structure for API data
+        
+        struct WeatherData: Codable {
+            let location: Location
+            let current: Current
+        }
+        struct Current: Codable {
+            let temp_c: Double
+            let condition: Condition
+        }
+        struct Condition: Codable {
+            let text, icon: String
+            let code: Int
+        }
+        struct Location: Codable {
+            let name: String
+            let lat: Double
+            let lon: Double
+            let localtime: String
+        }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,38 +59,14 @@ class MainVC: UIViewController, CLLocationManagerDelegate {
     
     }
     
-    
-// MARK: Make structure for API data
-    
-    struct WeatherData: Codable {
-        let location: Location
-        let current: Current
-    }
-    struct Current: Codable {
-        let temp_c: Double
-        let condition: Condition
-    }
-    struct Condition: Codable {
-        let text, icon: String
-        let code: Int
-    }
-    struct Location: Codable {
-        let name: String
-        let lat: Double
-        let lon: Double
-        let localtime: String
-    }
-
-    
-    
 //MARK: Button for get current location
     
     @IBAction func currentLocationPressed(_ sender: UIButton) {
    
         locManager.requestLocation()
     
-        lat = locManager.location?.coordinate.latitude ?? 77
-        long = locManager.location?.coordinate.longitude ?? 88
+        lat = locManager.location?.coordinate.latitude ?? 0.0
+        long = locManager.location?.coordinate.longitude ?? 0.0
     
         let alert  = UIAlertController(title: "Увага", message: "Використати поточну геолокацію для прогнозу погоди?", preferredStyle: .actionSheet)
             
@@ -118,7 +114,7 @@ extension MainVC {
     }
 }
 
-// Функція встановлення параметрів поточної локації
+// Function to set visual information to the mainVC
 
 extension MainVC {
     
@@ -147,8 +143,7 @@ extension MainVC {
     }
 }
 
-//MARK: Розширення UIImageView для загрузки картинки з URL
-
+//MARK: Extention UIImageView for download image from URL
 
 extension UIImageView {
     func load(urlString : String) {
