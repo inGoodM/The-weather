@@ -12,9 +12,6 @@
 		8BAAD9BF29C8C8F4002B23EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAD9BD29C8C8F4002B23EB /* Main.storyboard */; };
 		8BAAD9C129C8C906002B23EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAD9C029C8C906002B23EB /* Assets.xcassets */; };
 		8BAAD9C429C8C906002B23EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAD9C229C8C906002B23EB /* LaunchScreen.storyboard */; };
-		8BAAD9CF29C8C908002B23EB /* The_weatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAD9CE29C8C908002B23EB /* The_weatherTests.swift */; };
-		8BAAD9D929C8C908002B23EB /* The_weatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAD9D829C8C908002B23EB /* The_weatherUITests.swift */; };
-		8BAAD9DB29C8C908002B23EB /* The_weatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAD9DA29C8C908002B23EB /* The_weatherUITestsLaunchTests.swift */; };
 		8BAAD9FD29C94903002B23EB /* CustumTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAD9FC29C94903002B23EB /* CustumTabBarViewController.swift */; };
 		8BAAD9FF29C949CD002B23EB /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAD9FE29C949CD002B23EB /* MainVC.swift */; };
 		8BAADA0129C94A0D002B23EB /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAADA0029C94A0D002B23EB /* FavoriteVC.swift */; };
@@ -47,10 +44,7 @@
 		8BAAD9C329C8C906002B23EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BAAD9C529C8C906002B23EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BAAD9CA29C8C908002B23EB /* The weatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The weatherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BAAD9CE29C8C908002B23EB /* The_weatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_weatherTests.swift; sourceTree = "<group>"; };
 		8BAAD9D429C8C908002B23EB /* The weatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The weatherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BAAD9D829C8C908002B23EB /* The_weatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_weatherUITests.swift; sourceTree = "<group>"; };
-		8BAAD9DA29C8C908002B23EB /* The_weatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_weatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8BAAD9FC29C94903002B23EB /* CustumTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustumTabBarViewController.swift; sourceTree = "<group>"; };
 		8BAAD9FE29C949CD002B23EB /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		8BAADA0029C94A0D002B23EB /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
@@ -86,8 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				8BAAD9B629C8C8F3002B23EB /* The weather */,
-				8BAAD9CD29C8C908002B23EB /* The weatherTests */,
-				8BAAD9D729C8C908002B23EB /* The weatherUITests */,
 				8BAAD9B529C8C8F3002B23EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -111,23 +103,6 @@
 				8BAADA0829C9C593002B23EB /* Common Files */,
 			);
 			path = "The weather";
-			sourceTree = "<group>";
-		};
-		8BAAD9CD29C8C908002B23EB /* The weatherTests */ = {
-			isa = PBXGroup;
-			children = (
-				8BAAD9CE29C8C908002B23EB /* The_weatherTests.swift */,
-			);
-			path = "The weatherTests";
-			sourceTree = "<group>";
-		};
-		8BAAD9D729C8C908002B23EB /* The weatherUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8BAAD9D829C8C908002B23EB /* The_weatherUITests.swift */,
-				8BAAD9DA29C8C908002B23EB /* The_weatherUITestsLaunchTests.swift */,
-			);
-			path = "The weatherUITests";
 			sourceTree = "<group>";
 		};
 		8BAAD9E729C906C5002B23EB /* View */ = {
@@ -312,7 +287,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BAAD9CF29C8C908002B23EB /* The_weatherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,8 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BAAD9D929C8C908002B23EB /* The_weatherUITests.swift in Sources */,
-				8BAAD9DB29C8C908002B23EB /* The_weatherUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
