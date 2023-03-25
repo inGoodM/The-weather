@@ -1,7 +1,7 @@
 
 import UIKit
 
-class CustumTabBarViewController: UITabBarController {
+class TabBarController: UITabBarController {
 
     @IBInspectable var initialIndex: Int = 0
     

@@ -78,15 +78,9 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         urlForSearch = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(cityNameForSearch)&lang=uk"
         searchRequestFromApi(city: urlForSearch)
         
-        print(cityName)
-        print(cond)
-        print(temp_c)
-
         let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
-        arraySearchData.append(dataForCell)
-        
-        print(arraySearchData.count)
-        tableViewSearch.reloadData()
+       arraySearchData.append(dataForCell)
+       tableViewSearch.reloadData()
         
     }
     
@@ -94,7 +88,6 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     // Function for request
     
     func searchRequestFromApi (city url: String) {
-        print(url)
         guard let url = URL(string: url) else {
             nonCorrectCity()
             return
