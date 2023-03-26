@@ -17,7 +17,6 @@ class MainVC: UIViewController, CLLocationManagerDelegate {
 // Variable for perfomance
     
     let locManager = CLLocationManager()
-    var urlForCurrentLocation = ""
     var cityName = ""
     var temp_c = ""
     var cond = ""
@@ -56,43 +55,34 @@ class MainVC: UIViewController, CLLocationManagerDelegate {
         cityNameLable.text = ""
         tempLable.text = ""
         conditionLable.text = ""
-    
+        
     }
     
 //MARK: Button for get current location
     
     @IBAction func currentLocationPressed(_ sender: UIButton) {
-   
-        locManager.requestLocation()
     
-        lat = locManager.location?.coordinate.latitude ?? 0.0
-        long = locManager.location?.coordinate.longitude ?? 0.0
-    
-        let alert  = UIAlertController(title: "Увага", message: "Використати поточну геолокацію для прогнозу погоди?", preferredStyle: .actionSheet)
+        print("tap")
+            locManager.requestLocation()
+                          let alert = UIAlertController(title: "Увага", message: "Використати поточну геолокацію для прогнозу погоди?", preferredStyle: .actionSheet)
+                            alert.addAction(UIAlertAction(title: "Ні", style: .cancel))
+                            alert.addAction(UIAlertAction(title: "Добре", style: .default, handler: { _  in
             
-            alert.addAction(UIAlertAction(title: "Ні", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Добре", style: .default, handler: { _  in
-                
-                DispatchQueue.main.async {
-                    self.urlForCurrentLocation = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(self.lat),\(self.long)&lang=uk"
-                    self.getApiData(currentLocation: self.urlForCurrentLocation)
-                    self.setWeatherValue()
-                }
-                }))
-                present(alert, animated: true)
-            
+                                self.setWeatherValue()
+                                }))
+                        present(alert, animated: true)
         }
-    
     }
   
 //MARK: Extention MainVC
 
 extension MainVC {
     
-    func getApiData (currentLocation url: String) {
+    func getApiData (lattitude lat: Double, longitude long: Double) {
         
-        let url = URL(string: url)
-        let session = URLSession.shared
+        let urlForLocation = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(lat),\(long)&lang=uk"
+        let url = URL(string: urlForLocation)
+        let session =  URLSession.shared
         session.dataTask(with: url!) { [self]( data, response, error )  in
             if response != nil {
     
@@ -103,10 +93,12 @@ extension MainVC {
                 _ = try JSONSerialization.jsonObject(with: data )
                 let decoder = JSONDecoder()
                 let weather: WeatherData = try decoder.decode(WeatherData.self, from: data)
+                
                     cityName = weather.location.name
                     temp_c = String(weather.current.temp_c) + "°"
                     cond = weather.current.condition.text
                     condLink = "https:" + weather.current.condition.icon
+                    
                 } catch {
                 print(error)
             }
@@ -134,6 +126,9 @@ extension MainVC {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locManager.requestLocation()
+            lat = locManager.location?.coordinate.latitude ?? 0.0
+            long = locManager.location?.coordinate.longitude ?? 0.0
+            getApiData(lattitude: lat, longitude: long)
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

@@ -21,7 +21,6 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     var condLink = ""
     var isFavorite = false
     var arraySearchData: [SearchData] = []
-    
 
 // MARK: Make structure for API data and storage api information
     
@@ -60,22 +59,28 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         tableViewSearch.dataSource = self
         searchTextField.delegate = self
         searchTextField.keyboardAppearance = .dark
-        searchTextField.backgroundColor = .lightGray
-  
+        searchTextField.clearsOnBeginEditing = true
+        
     }
 
+   
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         
         searchTextField.endEditing(true)
-        
         cityNameForSearch = searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
         urlForSearch = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(cityNameForSearch)&lang=uk"
         searchRequestFromApi(city: urlForSearch)
-        
-        let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
-            arraySearchData.append(dataForCell)
-            tableViewSearch.reloadData()
-        
+            
+            let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
+            
+            if (cityNameForSearch != "") && (urlForSearch != "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=&lang=uk") && (dataForCell.titleCity != cityNameForSearch) {
+                arraySearchData.append(dataForCell)
+                tableViewSearch.reloadData()
+                searchTextField.text = ""
+            } else {
+                print("Пустое значение")
+            }
+
     }
     
     // Function for request
@@ -144,7 +149,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.backgroundColor = nil
         }
-        
         cell.textLabel?.textAlignment = .right
         return cell
     }

@@ -159,6 +159,8 @@
 			dependencies = (
 			);
 			name = "The weather";
+			packageProductDependencies = (
+			);
 			productName = "The weather";
 			productReference = 8BAAD9B429C8C8F3002B23EB /* The weather.app */;
 			productType = "com.apple.product-type.application";
@@ -231,6 +233,8 @@
 				Base,
 			);
 			mainGroup = 8BAAD9AB29C8C8F3002B23EB;
+			packageReferences = (
+			);
 			productRefGroup = 8BAAD9B529C8C8F3002B23EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
