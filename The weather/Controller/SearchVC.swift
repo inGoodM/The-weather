@@ -18,7 +18,6 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     var temp_c = ""
     var condition = ""
     var conditionLink = ""
-    var isFavorite = false
     var arraySearchData: [SearchData] = []
 
 // MARK: Make structure for API data and storage api information
@@ -47,7 +46,7 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         var cityNameForLable: String
         var temp_c: String
         var conditionLink: String
-        
+        var isFavorite = false
     }
     
     override func viewDidLoad() {
@@ -87,7 +86,7 @@ class SearchVC: UIViewController, UITextFieldDelegate {
                     cityNameForLable = weather.location.name
                     temp_c = String(weather.current.temp_c) + "°"
                     conditionLink = "https:" + weather.current.condition.icon
-                    arraySearchData.append(SearchData(cityNameForLable: cityNameForLable, temp_c: temp_c, conditionLink: conditionLink))
+                    arraySearchData.append(SearchData(cityNameForLable: cityNameForLable, temp_c: temp_c, conditionLink: conditionLink, isFavorite: false))
                     tableViewSearch.reloadData()
                 }
                 } catch {
@@ -151,14 +150,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.text = self.arraySearchData[indexPath.row].cityNameForLable + "                        " + self.arraySearchData[indexPath.row].temp_c
         cell.imageView?.load(urlString: self.arraySearchData[indexPath.row].conditionLink)
-
-        if isFavorite {
-            cell.backgroundColor = .systemBlue
-        } else {
-            cell.backgroundColor = nil
-        }
         cell.textLabel?.textAlignment = .right
-        
         return cell
         
     }
@@ -167,22 +159,39 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         true
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let favoriteActionTitle = isFavorite ? "Необрані" : "До обраних"
-        let favoriteAction = UITableViewRowAction(style: .normal, title: favoriteActionTitle, handler: {_, indexPath in
-            self.isFavorite.toggle()
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        })
-        favoriteAction.backgroundColor = .systemYellow
-
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Видалити", handler: {action, indexPath in
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Видалити", handler: {_,_,_ in
             self.arraySearchData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-           
+            self.tableViewSearch.deleteRows(at: [indexPath], with: .fade)
+            })
+        
+        let addToFavoreAction = UIContextualAction(style: .normal, title: "Favor", handler: {[self] _,_,_ in
+            
+            
+                if arraySearchData[indexPath.row].isFavorite != true {
+                    tableViewSearch.cellForRow(at: indexPath)?.backgroundColor = .systemYellow
+                    arraySearchData[indexPath.row].isFavorite.toggle()
+                }
+//            tableViewSearch.reloadRows(at: [indexPath], with: .automatic)
+                
+                
         })
-        deleteAction.backgroundColor = .systemRed
-        return [favoriteAction, deleteAction]
+        addToFavoreAction.backgroundColor = .systemYellow
+        
+        let unFavoreAction = UIContextualAction(style: .normal, title: "unFavor", handler: {[self] _,_,_ in
+    
+                arraySearchData[indexPath.row].isFavorite.toggle()
+//                tableViewSearch.reloadRows(at: [indexPath], with: .automatic)
+                tableViewSearch.cellForRow(at: indexPath)?.backgroundColor = .systemCyan
+               
+               
+        })
+        return UISwipeActionsConfiguration(actions: [deleteAction, unFavoreAction, addToFavoreAction])
     }
+
+    
+    
+    
 }
 
 

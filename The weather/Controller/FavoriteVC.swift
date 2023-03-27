@@ -3,6 +3,18 @@ import UIKit
 
 class FavoriteVC: UIViewController, UIApplicationDelegate {
 
+    
+    var searchDelegate = SearchVC()
+    var arrayForFavorite: [FavorData] = []
+    
+    
+    struct FavorData {
+        var cityName: String
+        var temperature: String
+        var urlImage: String
+        var condition: String
+    }
+    
     @IBOutlet weak var tableViewFavor: UITableView!
     
     override func viewDidLoad() {
