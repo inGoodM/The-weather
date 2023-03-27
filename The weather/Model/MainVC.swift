@@ -62,11 +62,10 @@ class MainVC: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func currentLocationPressed(_ sender: UIButton) {
     
-        print("tap")
             locManager.requestLocation()
                           let alert = UIAlertController(title: "Увага", message: "Використати поточну геолокацію для прогнозу погоди?", preferredStyle: .actionSheet)
-                            alert.addAction(UIAlertAction(title: "Ні", style: .cancel))
-                            alert.addAction(UIAlertAction(title: "Добре", style: .default, handler: { _  in
+                                alert.addAction(UIAlertAction(title: "Ні", style: .cancel))
+                                alert.addAction(UIAlertAction(title: "Добре", style: .default, handler: { _  in
             
                                 self.setWeatherValue()
                                 }))
@@ -118,6 +117,8 @@ extension MainVC {
      }
 }
 
+// Functions of location manager
+
 extension MainVC {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -132,8 +133,11 @@ extension MainVC {
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil {
-    
+        if (locations.first != nil) && (locations.first != locations.last) {
+            locManager.requestLocation()
+            lat = locManager.location?.coordinate.latitude ?? 0.0
+            long = locManager.location?.coordinate.longitude ?? 0.0
+            getApiData(lattitude: lat, longitude: long)
         }
     }
 }

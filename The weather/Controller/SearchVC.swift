@@ -4,7 +4,6 @@ import Foundation
 import CoreLocation
 
 
-
 class SearchVC: UIViewController, UITextFieldDelegate {
     
 
@@ -15,10 +14,10 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     
     var urlForSearch = ""
     var cityNameForSearch = ""
-    var cityName = ""
+    var cityNameForLable = ""
     var temp_c = ""
-    var cond = ""
-    var condLink = ""
+    var condition = ""
+    var conditionLink = ""
     var isFavorite = false
     var arraySearchData: [SearchData] = []
 
@@ -45,10 +44,9 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     
     struct SearchData {
         
-        var titleCity: String
-        var tempCity: String
-        var imageUrl: String
-        var linkUrl: String
+        var cityNameForLable: String
+        var temp_c: String
+        var conditionLink: String
         
     }
     
@@ -63,24 +61,10 @@ class SearchVC: UIViewController, UITextFieldDelegate {
         
     }
 
-   
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         
         searchTextField.endEditing(true)
-        cityNameForSearch = searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        urlForSearch = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(cityNameForSearch)&lang=uk"
-        searchRequestFromApi(city: urlForSearch)
-            
-            let dataForCell = SearchData(titleCity: cityName, tempCity: temp_c, imageUrl: condLink, linkUrl: urlForSearch)
-            
-            if (cityNameForSearch != "") && (urlForSearch != "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=&lang=uk") && (dataForCell.titleCity != cityNameForSearch) {
-                arraySearchData.append(dataForCell)
-                tableViewSearch.reloadData()
-                searchTextField.text = ""
-            } else {
-                print("Пустое значение")
-            }
-
+      
     }
     
     // Function for request
@@ -91,7 +75,7 @@ class SearchVC: UIViewController, UITextFieldDelegate {
             return
         }
         let session = URLSession.shared
-        session.dataTask(with: url) { [self]( data, response, error )  in
+        session.dataTask(with: url) { [self] ( data, response, error )  in
             if response != nil {
             } else { return }
             guard let data = data  else { return }
@@ -99,16 +83,22 @@ class SearchVC: UIViewController, UITextFieldDelegate {
                 _ = try JSONSerialization.jsonObject(with: data )
                 let decoder = JSONDecoder()
                 let weather: WeatherData = try decoder.decode( WeatherData.self, from: data)
-                cityName = weather.location.name
-                temp_c = String(weather.current.temp_c) + "°"
-                cond = weather.current.condition.text
-                condLink = "https:" + weather.current.condition.icon
-            } catch {
+                DispatchQueue.main.async { [self] in
+                    cityNameForLable = weather.location.name
+                    temp_c = String(weather.current.temp_c) + "°"
+                    conditionLink = "https:" + weather.current.condition.icon
+                    arraySearchData.append(SearchData(cityNameForLable: cityNameForLable, temp_c: temp_c, conditionLink: conditionLink))
+                    tableViewSearch.reloadData()
+                }
+                } catch {
                 print("Ошибка \(error)")
             }
         }.resume()
+  
+        
     }
     
+                    
     // Alert for non-correct cityname
     
     func nonCorrectCity () {
@@ -121,8 +111,25 @@ class SearchVC: UIViewController, UITextFieldDelegate {
     // Functions for textField
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Назва міста"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    
+        cityNameForSearch = searchTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        urlForSearch = "https://api.weatherapi.com/v1/current.json?key=001aecb53c464f309e0205050232103&q=\(cityNameForSearch)&lang=uk"
+        searchRequestFromApi(city: urlForSearch)
+        searchTextField.text = ""
     }
     
 }
@@ -134,23 +141,26 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         print("You tap me! ")
     }
     
-   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arraySearchData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = arraySearchData[indexPath.row].titleCity + "                        " + arraySearchData[indexPath.row].tempCity
-        cell.imageView!.load(urlString: arraySearchData[indexPath.row].imageUrl)
         
+        cell.textLabel?.text = self.arraySearchData[indexPath.row].cityNameForLable + "                        " + self.arraySearchData[indexPath.row].temp_c
+        cell.imageView?.load(urlString: self.arraySearchData[indexPath.row].conditionLink)
+
         if isFavorite {
             cell.backgroundColor = .systemBlue
         } else {
             cell.backgroundColor = nil
         }
         cell.textLabel?.textAlignment = .right
+        
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

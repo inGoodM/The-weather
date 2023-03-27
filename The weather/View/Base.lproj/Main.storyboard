@@ -15,32 +15,32 @@
             <objects>
                 <viewController id="fTZ-Jq-vBo" customClass="MainVC" customModule="The_weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Kp-LN-3It">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="kKY-oh-YT9">
                                 <rect key="frame" x="5" y="98" width="404" height="665"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Миколаїв" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5O-uh-oWz">
-                                        <rect key="frame" x="107" y="0.0" width="190" height="54.5"/>
+                                        <rect key="frame" x="107" y="0.0" width="190" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09Q-Um-Dc0">
-                                        <rect key="frame" x="157.5" y="114.5" width="89" height="72.5"/>
+                                        <rect key="frame" x="157.5" y="114" width="89" height="72"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сонячно" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abj-HJ-W6a">
-                                        <rect key="frame" x="162" y="247" width="80" height="24.5"/>
+                                        <rect key="frame" x="162" y="246" width="80" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K2F-LB-ISZ">
-                                        <rect key="frame" x="5" y="331.5" width="394" height="333.5"/>
+                                        <rect key="frame" x="5" y="330" width="394" height="335"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -81,7 +81,7 @@
                         <imageReference key="image" image="cloud.sun" catalog="system" symbolScale="large"/>
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" id="zEv-oX-Nme"/>
+                    <navigationItem key="navigationItem" title="Головна" largeTitleDisplayMode="always" id="zEv-oX-Nme"/>
                     <connections>
                         <outlet property="cityNameLable" destination="W5O-uh-oWz" id="wcr-jg-TdO"/>
                         <outlet property="conditionImage" destination="K2F-LB-ISZ" id="NdT-CW-F0f"/>
@@ -98,7 +98,7 @@
             <objects>
                 <viewController id="6mK-Zl-ZLR" customClass="FavoriteVC" customModule="The_weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5t-CH-YfK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Vvp-a3-Xtx">
@@ -137,7 +137,7 @@
                         <imageReference key="image" image="star" catalog="system" symbolScale="large"/>
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" title="Обрані" id="fLc-fL-mSO"/>
+                    <navigationItem key="navigationItem" title="Обрані" largeTitleDisplayMode="always" id="fLc-fL-mSO"/>
                     <connections>
                         <outlet property="tableViewFavor" destination="Vvp-a3-Xtx" id="gxq-VB-Yf8"/>
                     </connections>
@@ -151,7 +151,7 @@
             <objects>
                 <viewController id="OVV-qM-EaX" customClass="SearchVC" customModule="The_weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="56u-fn-LEX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Назва мiста" textAlignment="center" minimumFontSize="19" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rab-UC-3w6">
@@ -218,7 +218,7 @@
                         <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
                         <color key="badgeColor" systemColor="systemCyanColor"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" id="2iN-cH-0Tp">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="2iN-cH-0Tp">
                         <string key="title">Пошук	</string>
                     </navigationItem>
                     <connections>
@@ -234,12 +234,12 @@
         <scene sceneID="eHV-io-LkV">
             <objects>
                 <tabBarController id="ijT-m2-TfP" customClass="TabBarController" customModule="The_weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yWv-dD-Znd">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" itemPositioning="fill" id="yWv-dD-Znd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemYellowColor"/>
                         <color key="selectedImageTintColor" systemColor="systemYellowColor"/>
                     </tabBar>
                     <userDefinedRuntimeAttributes>
